@@ -12,7 +12,7 @@ services:
     ports:
       - "5432:5432"
   app:
-    build: ./DB-Web-App-with-PostgreSQL-Server-and-Python
+    build: ./app
     depends_on:
       - postgres
     ports:
