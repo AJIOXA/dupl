@@ -18,6 +18,6 @@ RUN flask run
 #RUN ./ConnectInfo.sh
 
 
-CMD ["/usr/sbin/httpd", "-DFOREGROUND"]
+#CMD ["/usr/sbin/httpd", "-DFOREGROUND"]
 
 EXPOSE 5000

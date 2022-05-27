@@ -1,5 +1,7 @@
 FROM postgres:14-alpine
-COPY postconf.sh .
+WORKDIR /var/lib/postgresql/data
+RUN rm -rf *
+
 
 WORKDIR /docker-entrypoint-initdb.d
 
