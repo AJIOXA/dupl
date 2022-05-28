@@ -3,7 +3,7 @@ services:
   postgr:
     restart: always
     build: ./postgr
-    container_name: postgr14
+#    container_name: postgr14
     environment:
       POSTGRES_DB: "chain"
       POSTGRES_USER: "postgres"
@@ -14,19 +14,30 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - default
+      back:
+        ipv4_address: 172.16.238.4
+      default:
   app:
     depends_on:
       - postgr
     restart: always
     build: ./app
-    container_name: applyc
-    links:
-      - postgr:db
-
+  #  container_name: applyc
     ports:
       - "5000:5000"
     networks:
-      - default
+      back:
+        ipv4_address: 172.16.238.5
+      default:
 networks:
+  back:
+    driver: bridge
+#    enable_ipv6: true
+#    internal: true
+    attachable: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.238.0/24
   default:
+    driver: bridge
