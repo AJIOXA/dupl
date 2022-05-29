@@ -79,8 +79,8 @@ table {
 
     <div class="logo">
     <h2 class="intro">Don't forget to wear a mask!</h2>
-   <img src="{{url_for('static', filename='images/mask.png')}}"/>
-   <!-- <img src="./static/mask.png"/> -->
+    <img src="{{url_for('static', filename='images/monkey.png')}}"/>
+    <!-- <img src="./static/monkey.png"/> -->
 
    </div>
 
@@ -97,7 +97,7 @@ table {
 	    <td>Doctor Years of Experience</td>
 
          </thead>
-         
+
          {% for row in rows1 %}
             <tr>
                <td>{{ row[0] }}</td>
@@ -110,19 +110,19 @@ table {
       </table>
 	  </td>
 	  </tr>
-	  
+
 	<tr>
 <tr><td>
 <h1> Search for a Doctor </h1>
-	
+
 	   <form action="{{ url_for('main') }}" method="POST">
       <br>  Enter a Doctor ID: <br>
-      
+
         <input type="text" name="docid"><br>
-      
-    
+
+
         <input type="submit" value="Submit ID">
-</form> 
+</form>
 		</td>
 		<div id = "ifselected">
 		{% if scroll %}
@@ -140,38 +140,38 @@ table {
 	   <li>and he/she has {{ num2 }} other patients </li>
 	   <li>They are {{ pat2 }}</li>
 	   <li>ALL his/her prescribed drugs are: {{ drugsall }} </li>
-       
+
 	   <li>Pharmacies supervised are: {{ pharm }}</li>
-       
+
 	</ul>
-       
+
 	  </td>
-		
-	
+
+
 </tr>
 
 	  <tr><td>
 	  <h1> Insert A New Doctor </h1>
 	  <div id = "iferroroccured"></div>
-	  {% if error %}  
-        <p style="color:red;"><strong>Error</strong>: {{error}}</p>  
-	{% endif %}  
-	  
+	  {% if error %}
+        <p style="color:red;"><strong>Error</strong>: {{error}}</p>
+	{% endif %}
+
 	   <form action="{{ url_for('enterdoctor') }}" method="POST">
       <br>  Enter Doctor ID: <br>
-      
+
         <input type="text" name="doctorid" required><br>
-		
+
 		<br>  Enter Doctor Name: <br>
-      
+
         <input type="text" name="doctorname" required><br>
-		
+
 		<br>  Enter Doctor Specialty: <br>
-      
+
         <input type="text" name="doctorspecialty"><br>
-		
+
 		<br>  Enter Doctor Years of experience: <br>
-      
+
         <input type="number" name="doctoryoe" required><br>
 		<h1></h1>
   <label for="patients">Choose a patient:</label>
@@ -182,14 +182,14 @@ table {
 </SELECT>
   </select>
   <h1></h1>
-  
+
   <form action="">
   <input type="radio" id="Primary" name="typeofpatient" value="Primary" required>
   <label for="Primary">Primary</label>
   <input type="radio" id="Other" name="typeofpatient" value="Other" required>
   <label for="Other">Other</label><br>
     <h1></h1>
-	
+
 	<div id = "iferroroccured">
 		{% if scroll %}
 		<script>
@@ -199,12 +199,12 @@ table {
 		{% endif %}
 		</div>
         <input type="submit" value="Submit">
-  </form> 
+  </form>
 
-</form> 
+</form>
 		</td>
 
 	  </table>
-	 
+
    </body>
 </html>

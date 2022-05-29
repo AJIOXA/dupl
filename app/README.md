@@ -21,3 +21,4 @@ https://pharmacies-chain.herokuapp.com/
 7) pip install psycopg2
 8) pip install gunicorn
 9) flask run
+10) ./cleany.sh for removing containers, networks and images form docker
