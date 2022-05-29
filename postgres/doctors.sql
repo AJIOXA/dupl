@@ -69,9 +69,6 @@ create table PatientsandDoctors(
 	Foreign Key(D_ID) REFERENCES Doctors(D_ID)
 );
 
-
-
-
 INSERT INTO patients VALUES (111, 'Ali', 'Beirut', 52);
 INSERT INTO patients VALUES (113, 'Mousa', null, 32);
 INSERT INTO patients VALUES (221, 'Mohamad', 'Hazmiyeh', 20);
