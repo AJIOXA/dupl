@@ -1,42 +1,22 @@
 version: "3.9"
 services:
-  postgr:
+  postgres:
+    build:
+      context: ./postgres
     restart: always
-    build: ./postgr
-    command: flask run
+    ports:
+      - "5432:5432"
     environment:
-      POSTGRES_DB: "chain"
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "123"
-      POSTGRES_HOST_AUTH_METHOD: "trust"
-    volumes:
-      - /home/ajioxa/prove/postgr:/var/lib/postgresql/data
-    ports:
-      - "8001:5432"
-    networks:
-      back:
-        ipv4_address: 172.16.238.4
-      default:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=chain
+      - POSTGRES_PASSWORD=123
   app:
-    depends_on:
-      - postgr
-    restart: always
     build: ./app
-  #  container_name: applyc
     ports:
-      - "8000:5000"
-    networks:
-      back:
-        ipv4_address: 172.16.238.5
-      default:
-networks:
-  back:
-    driver: bridge
-    internal: true
-    attachable: true
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.16.238.0/16
-  default:
-    driver: bridge
+      - "80:5000"
+    depends_on:
+      - postgres
+    environment:
+      WAIT_HOSTS: postgres:5432
+    env_file:
+      - ./.env.dev

@@ -5,18 +5,19 @@ Created on Wed Mar 23 22:33:52 2022
 @author: Mohammed
 """
 
+import os
 import psycopg2
 import flask
 from flask import Flask
 from flask import render_template
 from flask import request, url_for, flash, redirect
 
+
 conn = psycopg2.connect(
         database="chain", user='postgres',
-        password='123', host='172.16.238.4', port= '5432')
+        password='123', host='postgres', port= '5432')
 
 cursor = conn.cursor()
-
 
 app = Flask(__name__)
 
@@ -24,7 +25,7 @@ app = Flask(__name__)
 def main():
     conn = psycopg2.connect(
         database="chain", user='postgres',
-        password='123', host='172.16.238.4', port= '5432')
+        password='123', host='postgres', port= '5432')
     cc = "Doctors"
     error = None
     cursor = conn.cursor()
@@ -112,7 +113,7 @@ def main():
 def enterdoctor():
     conn = psycopg2.connect(
         database="chain", user='postgres',
-        password='123', host='172.16.238.4', port= '5432')
+        password='123', host='postgres', port= '5432')
     cursor = conn.cursor()
     doctorid = request.form.get('doctorid')
     doctorname = request.form.get('doctorname')
@@ -169,7 +170,7 @@ def enterdoctor():
 def patients():
     conn = psycopg2.connect(
         database="chain", user='postgres',
-        password='123', host='172.16.238.4', port= '5432')
+        password='123', host='postgres', port= '5432')
     cc = "Patients"
     cursor = conn.cursor()
     try:
@@ -234,7 +235,7 @@ def patients():
 def enterpatient():
     conn = psycopg2.connect(
         database="chain", user='postgres',
-        password='123', host='172.16.238.4', port= '5432')
+        password='123', host='postgres', port= '5432')
     cursor = conn.cursor()
     error = None
     patiid = request.form.get('patientid')
@@ -350,7 +351,7 @@ def enterpatient():
 def enterpharmacy():
     conn = psycopg2.connect(
         database="chain", user='postgres',
-        password='123', host='172.16.238.4', port= '5432')
+        password='123', host='postgres', port= '5432')
     cursor = conn.cursor()
 
     cursor.execute("select d_id, name from doctors")
@@ -406,7 +407,7 @@ def enterpharmacy():
 def prescribe():
     conn = psycopg2.connect(
         database="chain", user='postgres',
-        password='123', host='172.16.238.4', port= '5432')
+        password='123', host='postgres', port= '5432')
     cc = "Prescribe Medicine"
     cursor = conn.cursor()
 
@@ -442,7 +443,7 @@ def prescribe():
 def prescribe2():
     conn = psycopg2.connect(
         database="chain", user='postgres',
-        password='123', host='172.16.238.4', port= '5432')
+        password='123', host='postgres', port= '5432')
     cc = "Prescribe Medicine"
     cursor = conn.cursor()
     patidd = request.form.get('patients')
@@ -527,7 +528,7 @@ def prescribe2():
 def enterprescription():
     conn = psycopg2.connect(
         database="chain", user='postgres',
-        password='123', host='172.16.238.4', port= '5432')
+        password='123', host='postgres', port= '5432')
     cursor = conn.cursor()
 
     medid = request.form.get('medicines')
@@ -594,7 +595,7 @@ def enterprescription():
 def drugs():
     conn = psycopg2.connect(
         database="chain", user='postgres',
-        password='123', host='172.16.238.4', port= '5432')
+        password='123', host='postgres', port= '5432')
     cc = "Drugs Prescribed"
     cursor = conn.cursor()
     try:
@@ -621,7 +622,7 @@ def drugs():
 def pharmacies():
     conn = psycopg2.connect(
         database="chain", user='postgres',
-        password='123', host='172.16.238.4', port= '5432')
+        password='123', host='postgres', port= '5432')
     cc = "Pharmacies"
     cursor = conn.cursor()
     try:
@@ -740,7 +741,7 @@ def select_patient():
 def select_location():
     conn = psycopg2.connect(
         database="chain", user='postgres',
-        password='123', host='172.16.238.4', port= '5432')
+        password='123', host='postgres', port= '5432')
     cc = 'Nearby Pharmacies'
     locname = request.form.get('loc')
 
@@ -790,5 +791,5 @@ def doctor():
     return redirect(url_for('select_doctor'))
 
 if __name__ == "__main__":
-    from waitress import serve
-    serve(app, host="172.16.238.4", port=8000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)
