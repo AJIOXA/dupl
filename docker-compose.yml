@@ -3,7 +3,7 @@ services:
   postgr:
     restart: always
     build: ./postgr
-#    container_name: postgr14
+    command: flask run
     environment:
       POSTGRES_DB: "chain"
       POSTGRES_USER: "postgres"
@@ -12,7 +12,7 @@ services:
     volumes:
       - /home/ajioxa/prove/postgr:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "8001:5432"
     networks:
       back:
         ipv4_address: 172.16.238.4
@@ -24,7 +24,7 @@ services:
     build: ./app
   #  container_name: applyc
     ports:
-      - "5000:5000"
+      - "8000:5000"
     networks:
       back:
         ipv4_address: 172.16.238.5
@@ -32,12 +32,11 @@ services:
 networks:
   back:
     driver: bridge
-#    enable_ipv6: true
-#    internal: true
+    internal: true
     attachable: true
     ipam:
       driver: default
       config:
-        - subnet: 172.16.238.0/24
+        - subnet: 172.16.238.0/16
   default:
     driver: bridge

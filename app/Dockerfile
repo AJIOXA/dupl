@@ -11,8 +11,8 @@ WORKDIR /home/project
 COPY . .
 
 
-RUN export FLASK_APP=app.py
-RUN flask run
+#RUN export FLASK_APP=app.py
+RUN python3 app.py
 
 #RUN chmod +x ConnectInfo.sh
 #RUN ./ConnectInfo.sh

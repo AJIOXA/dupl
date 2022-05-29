@@ -6,6 +6,7 @@ Created on Wed Mar 23 22:33:52 2022
 """
 
 import psycopg2
+import flask
 from flask import Flask
 from flask import render_template
 from flask import request, url_for, flash, redirect
@@ -789,4 +790,5 @@ def doctor():
     return redirect(url_for('select_doctor'))
 
 if __name__ == "__main__":
-    app.run()
+    from waitress import serve
+    serve(app, host="172.16.238.4", port=8000)
